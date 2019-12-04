@@ -1,0 +1,106 @@
+<h1>What personality trait describes you most?</h1>
+        
+<div class="leftside">
+    <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+  <p> <strong>
+    - &nbsp;<input type="checkbox" name="q1" class="answer" value="thor"> Brave </input> <br> - &nbsp;<input name="q1" type="checkbox" class="answer" value="hulk"  >Hot Headed</input><br> - &nbsp;<input name="q1" type="checkbox" class="answer" value="antman"  >Sarcastic</input> <br> 
+      </strong>
+</p>  
+    
+    </div>
+    <div class="rightside">
+        <p><strong>- &nbsp;<input name="q1" type="checkbox" class="answer" value="groot"  >Childish</input><br> - &nbsp;<input name="q1" type="checkbox" class="answer" value="captain_america"  >Old Fashioned</input> <br> - &nbsp;<input name="q1" type="checkbox" class="answer" value="spiderman" >Funny</input></strong> </p> 
+    </div>
+    
+    
+     <div class="next">
+<input id="2" type="button" value="NEXT" onclick="addScore()">
+</div> 
+</div>
+<!-- 
+//Question 2  -->
+<div id="q2">
+    <h1>What is your favorite color?</h1>
+    
+    <div class="leftside">
+        <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+      <p> <strong>
+         &nbsp;<input type="checkbox" name="q2" class="answer" value="hulk"> Green </input> <br>  &nbsp;<input name="q2" type="checkbox" class="answer" value="antman"  > Red</input><br>  &nbsp;<input name="q2" type="checkbox" class="answer" value="captain_america"  > Blue </input> <br> 
+          </strong>
+    </p>  
+        
+        </div>
+        <div class="rightside">
+            <p><strong> &nbsp;<input name="q2" type="checkbox" class="answer" value="blackwidow"  > Black</input> &nbsp;<input name="q2" type="checkbox" class="answer" value="captain_marvel"  > Yellow</input></strong> </p> 
+        </div>
+        
+        
+         <div class="next">
+    <input id="3" type="button" value="NEXT" onclick="addScore()">
+</div> 
+    </div>
+</div>
+<!-- Question 3  -->
+<div id="q3">
+        <h1>What is your favorite food?</h1>
+        
+        <div class="leftside">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q3" class="answer" value="groot"> Mac & Cheese </input> <br>  &nbsp;<input name="q3" type="checkbox" class="answer" value="hulk"  > Tacos</input><br>  &nbsp;<input name="q3" type="checkbox" class="answer" value="spiderman"  > Chicken Tenders </input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside">
+                <p><strong> &nbsp;<input name="q3" type="checkbox" class="answer" value="blackwidow"  > Salad</input> &nbsp;<input name="q3" type="checkbox" class="answer" value="ironman"  > Donuts</input></strong> </p> 
+            </div>
+            
+            
+             <div class="next">
+        <input id="4" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+    </div>
+    <!-- question 4  -->
+    <div id="q4">
+            <h1> What is your favorite vacation sport?</h1>
+            
+            <div class="leftside">
+                <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+              <p> <strong>
+                 &nbsp;<input type="checkbox" name="q4" class="answer" value="dr_strange"> Florida </input> <br>  &nbsp;<input name="q4" type="checkbox" class="answer" value="antman"  > Bahamas</input><br>  &nbsp;<input name="q4" type="checkbox" class="answer" value="blackwidow"  > California </input> <br> 
+                  </strong>
+            </p>  
+                
+                </div>
+                <div class="rightside">
+                    <p><strong> &nbsp;<input name="q4" type="checkbox" class="answer" value="spiderman"  > Europe</input> &nbsp;<input name="q4" type="checkbox" class="answer" value="captain_marvel"  > New York City</input></strong> </p> 
+                </div>
+                
+                
+                 <div class="next">
+            <input id="5" type="button" value="NEXT" onclick="addScore()">
+        </div> 
+            </div>
+        </div>
+        <!-- question 5  -->
+        <div id="q5">
+                <h1> Choose a Planet to Visit: </h1>
+                
+                <div class="leftside">
+                    <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+                  <p> <strong>
+                     &nbsp;<input type="checkbox" name="q5" class="answer" value="captain_america"> Earth </input> <br>  &nbsp;<input name="q5" type="checkbox" class="answer" value="groot"  > I AM GROOT!</input><br>  &nbsp;<input name="q5" type="checkbox" class="answer" value="blackwidow"  > Vormir </input> <br> 
+                      </strong>
+                </p>  
+                    
+                    </div>
+                    <div class="rightside">
+                        <p><strong> &nbsp;<input name="q5" type="checkbox" class="answer" value="thor"  > Asgard</input> &nbsp;<input name="q5" type="checkbox" class="answer" value="dr_strange"  > Nowhere</input></strong> </p> 
+                    </div>
+                    
+                    
+                     <div class="next">
+                <input id="6" type="button" value="NEXT" onclick="addScore()">
+            </div> 
+            </div>
