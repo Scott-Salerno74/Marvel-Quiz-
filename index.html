@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<!-- Start of head copy -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA_Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel_Character_Quiz</title>
+<!-- bootstrap links for progress bar and jQuery link --> 
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<!--Begin Style Section-->
+<!-- Code By Alyssa -->
+<style>
+    
+   body {background-color: black;
+        
+    }  
+    
+   
+    
+    .background1 img {width: 80%; 
+                      position: absolute; 
+                      left: 10%;  
+                      top: 8%; 
+                      opacity: 20%;
+                      z-index: -99;
+                    visibility: visible;}
+    header {width: 100%; 
+            height: 200px; }
+    
+    header img {width: 70%; 
+                position: absolute; 
+                left: 15%;
+               }
+     @font-face {
+    font-family: 'Marvel';
+    src: url('Marvel-Regular.woff2') format('woff2'),
+        url('Marvel-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+    .title h1 {color:  #ff1a1a; 
+            font-family: Marvel; 
+            font-size: 4em; 
+            font-style: normal; 
+            font-variant: normal; 
+            font-weight: 50; 
+            letter-spacing: 3px; }
+    .title {
+        position:absolute; 
+        margin-top: 10%;
+        left: 35%;
+
+    }
+
+    .start input { background-color: #ff1a1a; 
+                    color: black;
+                    width: 200px;
+                    height: 100px; 
+                    font-size: 3em; 
+                    font-family: Impact, Charcoal, sans-serif;}
+    
+    .start {margin-left: 42%; 
+            margin-top: 15%;}
+            .title {
+        position:absolute; 
+        left: 35%; 
+      
+        top: 19%;
+    }
+    .questionTitle {
+        position:absolute; 
+        left: 35%; 
+      
+        top: 19%;
+    }
+    .whitebox {background-color: white; 
+               width: 40%; 
+               height: 50%; 
+               position: absolute; 
+               top: 35%; 
+               left: 29%; 
+               padding: 15px;
+                opacity: 60%;
+                display: none;
+    }
+    #q2{
+        display: none;
+    }
+
+    .whitebox h1 {color:  #ff1a1a; 
+                  font-family: Impact, Charcoal, sans-serif;
+                  letter-spacing: 3px;
+                  text-align: center;}
+    
+    .whitebox p {font-size: 1.3em;
+                line-height: 2;
+                margin-left: 10%;
+                font-family: Tahoma, Geneva, sans-serif;
+        
+    }
+    
+    .leftside {float: left;  
+               width: 30%; 
+               margin-left: 15%;}
+    .rightside {float: right;  
+                width: 40%; 
+                margin-right: 10%; }
+    
+      .next input { background-color: #ff1a1a; 
+                    color: black;
+                    width: 100px;
+                    height: 50px; 
+                    font-size: 2em; 
+                    font-family: Impact, Charcoal, sans-serif;
+                    letter-spacing: 3px;
+                    margin-top: 5%;}
+    .next {margin-left: 39%; }
+    .progress{margin-top:3%;}
+</style>
+<!--End Style-->
+<!--Script (Scott)-->
+<script>
+    //Scott Wrote this 
+//Variables for characters
+var CAPTAIN_AMERICA = 0; 
+var THOR = 0; 
+var HULK =0;
+var IRONMAN = 0;
+var SPIDERMAN = 0;
+var BLACKWIDOW = 0;
+var CAPTIAN_MARVEL = 0;
+var DR_STRANGE = 0;
+var ANTMAN =0; 
+var GROOT =0;
+
+// Array to Hold string value for heros
+var stringHero = ["captain_america","thor","hulk","ironman","spiderman","blackwidow","captain_marvel","dr_strange","antman","groot"];
+function getResult(){
+//Array of characters to compare
+var Hero = [CAPTAIN_AMERICA,THOR,HULK,IRONMAN,SPIDERMAN,BLACKWIDOW,CAPTIAN_MARVEL,DR_STRANGE,ANTMAN];
+var max = 0;
+var heroIndex = 0;
+//For loop to get the largest Value 
+for(i =0; i < Hero.length; i++){
+    if (Hero[i] > max ){
+        max = Hero[i];
+        heroIndex = i;
+    }
+}
+alert(stringHero[heroIndex]);
+}
+//takes the outcome and adds 1 to score for the hero the answer corresponds too
+//Scott Wrote this
+function addScore(){
+    var heroName = $('.answer:checked').val();
+    if (heroName == "captain_america"){
+        CAPTAIN_AMERICA ++;
+    }
+    else if (heroName == "thor"){
+        THOR ++;
+    
+    }
+    else if (heroName == "hulk"){
+        HULK ++;
+    }
+    else if (heroName == "ironman"){
+        IRONMAN ++;
+    }
+    else if (heroName == "spiderman"){
+        SPIDERMAN ++;
+    }
+    else if (heroName == "blackwidow"){
+        BLACKWIDOW ++;
+    }
+    else if (heroName == "captain_marvel"){
+        CAPTIAN_MARVEL ++;
+    }
+    else if (heroName == "dr_strange"){
+        DR_STRANGE++;
+    }
+    else if (heroName == "antman"){
+        ANTMAN ++;
+    } 
+    else if(heroName == "groot"){
+        GROOT++;
+    }
+   
+    
+    
+}       
+//End Scott Code 
+
+/* functions show and hide questions and progress bar when buttons on each page are clicked on*/
+// Alyssa wrote this 
+   $(document).ready(function(){
+       $("#1").click(function(){
+           $(".title").fadeOut(500)
+           $('.start').fadeOut(500)
+           $('.whitebox').fadeIn(1000)
+       });
+       $("#2").click(function(){
+           $('.whitebox').fadeOut(0)
+           $('#q2').fadeIn(500)
+       });
+        $("#3").click(function(){
+           $('#two').fadeOut(0)
+           $('#three').fadeIn(500)
+       });
+        $("#4").click(function(){
+           $('#three').fadeOut(0)
+           $('#four').fadeIn(500)
+       });
+        $("#5").click(function(){
+           $('#four').fadeOut(0)
+           $('#five').fadeIn(500)
+       });
+        $("#6").click(function(){
+           $('#five').fadeOut(0)
+           $('#six').fadeIn(500)
+       });
+        $("#7").click(function(){
+           $('#six').fadeOut(0)
+           $('#seven').fadeIn(500)
+       });
+        $("#8").click(function(){
+           $('#seven').fadeOut(0)
+           $('#eight').fadeIn(500)
+       });
+        $("#9").click(function(){
+           $('#eight').fadeOut(0)
+           $('#nine').fadeIn(500)
+       });
+        $("#10").click(function(){
+           $('#nine').fadeOut(0)
+           $('#ten').fadeIn(500)
+       });
+        $("#11").click(function(){
+           $('#ten').fadeOut(0)
+           $('#endScreen').fadeIn(1000)
+       });
+   
+   
+   });
+   //End of Alyssa Code 
+   //Scott Wrote this 
+   $(document).ready(function(){
+   $('input[type="checkbox"]').on('change', function() {
+    $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+
+});
+   });
+   //End Scott Code
+</script>
+  <!--End Script-->
+
+</head>
+<!--End Head copy--> 
+    
+    
+    
+<!--Begin Body Copy-->
+<body>
+    
+<div id ="wrapper">
+    
+<header>
+    
+    <img src ="assets/marvel%20logo.png" alt = "Logo" width= "100%" height ="auto">
+    
+</header>
+
+<div class = "background1">
+    
+    <img src ="assets/Endgame-wallpapers-HD-Images-4K-Marvel-Studios-Avengers-Background.jpg" alt ="Avengers" width="100%" height ="auto">
+    
+</div>
+
+<div class="title">
+    
+    <h1>WHO ARE YOU QUIZ</h1>
+
+</div>
+    
+    
+    
+    
+   <!--This button will hide everything and make the first question appear: see questions.html-->
+    
+ <div class="start">
+    <input id="1" type="button" value="START" >
+</div> 
+
+<div class="whitebox">
+    
+        <h1>What personality trait describes you most?</h1>
+        
+        <div class="leftside">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+            - &nbsp;<input type="checkbox" name="q1" class="answer" value="thor"  >Brave</input> <br> - &nbsp;<input name="q1" type="checkbox" class="answer" value="hulk"  >Hot Headed</input><br> - &nbsp;<input name="q1" type="checkbox" class="answer" value="antman"  >Sarcastic</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside">
+                <p><strong>- &nbsp;<input name="q1" type="checkbox" class="answer" value="groot"  >Childish</input><br> - &nbsp;<input name="q1" type="checkbox" class="answer" value="captain_america"  >Old Fashioned</input> <br> - &nbsp;<input name="q1" type="checkbox" class="answer" value="spiderman" >Funny</input></strong> </p> 
+            </div>
+            
+            
+             <div class="next">
+        <input id="2" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="10"
+  aria-valuemin="0" aria-valuemax="100" style="width:10%">
+    <span class="sr-only">10% Complete</span>
+  </div>
+        </div>
+    
+    
+    <div id="q2">Hello World</div>
+    
+    
+    
+    
+    
+</div>   
+    
+</body>
+<!--End Body Copy-->
+
+
+</html>
