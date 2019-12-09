@@ -78,7 +78,9 @@
 
         top: 19%;
     }
-    .whitebox {background-color: white; 
+    .whitebox {
+        background-image: url("img.jpg");
+        background-color: white; 
                width: 40%; 
                height: 50%; 
                position: absolute; 
@@ -331,7 +333,7 @@
     }
     .endbox img {width: 50%; height: auto; float: left; margin-top: 5%;}
     .endbox p {width: 40%; float: right; color: black; margin-top: 10%; line-height: 2; margin-right: 5%;}
-    .getResult{ display: none;}
+    #getResult{ background-image: url(assets/294561.jpg);}
     .getResultButton{
         display: none;
         background-color: #ff1a1a; 
@@ -342,18 +344,18 @@
                     font-family: Impact, Charcoal, sans-serif;
                     letter-spacing: 3px;
                     margin-top: 10%;
-    position: absolute; top: 250px; left: 210px;
+    position: absolute; top: 200px; left: 210px;
     clear: all;}
     .restartButton{
         background-color: #ff1a1a; 
                     color: black;
                     width: 150px;
-                    height: 85px; 
+                    height: 70px; 
                     font-size: 2em; 
                     font-family: Impact, Charcoal, sans-serif;
                     letter-spacing: 3px;
                     margin-top: 10%;
-    position: absolute; top: 250px; left: 210px;
+    position: absolute; top: 250px; left: 650px;
     clear: all;
     }
     #captain_america
@@ -377,6 +379,11 @@
      #groot
      { display: none;}         
      
+    #resultImage{
+        display: none;
+        width: 100%;
+        height: auro;
+    }
     
                 
     
@@ -517,11 +524,12 @@ $(document).ready(function(){
        
             // Scott wrote this 
         $('.nextButton').click(function(){
-           $(randomQuestionsArr[i]).fadeOut(500)
+           $(randomQuestionsArr[i]).fadeOut(0)
            $(randomQuestionsArr[i+1]).fadeIn(500)
            i = i+1;    
            if(i == 10){
         $('.getResultButton').fadeIn(500)
+        $("#resultImage").fadeIn(500)       
        }  
            //alert(randomQuestionsArr[i]);
        });
@@ -532,8 +540,9 @@ $(document).ready(function(){
         //End Scott 
         //Alyssa and Sofia Wrote this 
          $('.getResultButton').click(function(){
-            $(randomQuestionsArr[i]).fadeOut(500)
-            $('.whitebox').fadeOut(500)
+             $(randomQuestionsArr[i]).fadeOut(500)
+             $('.whitebox').fadeOut(500)
+             $("#resultImage").fadeOut(500) 
             $('.endbox').fadeIn(500)
             var hero = "#" +getResult()
             $(hero).fadeIn(1000);
@@ -545,9 +554,10 @@ $(document).ready(function(){
 }
   
   
-       
  ,)});
    //End Scott Code
+    
+
 </script>
   <!--End Script-->
 
@@ -608,7 +618,7 @@ $(document).ready(function(){
             
              <div class="next">
         <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
-                 
+           
     </div> 
 
   <!--          <div class="progress">
@@ -1035,7 +1045,7 @@ $(document).ready(function(){
             
 </div> 
 <div id="getResult">
-    
+    <img id="resultImage" src="assets/294561.jpg" alt="Avengers">
     <input class="getResultButton" type="button" value="Get Result" >
 </div> 
 
