@@ -1,307 +1,1144 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <!-- Required meta tags -->
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-    <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>Recruitment Site</title>
-   <!-- Latest compiled and minified CSS -->
+<!-- Start of head copy -->
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA_Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Marvel_Character_Quiz</title>
+<!-- bootstrap links for progress bar and jQuery link --> 
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
-
-<!-- jQuery library -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-
-<!-- Latest compiled JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-<!-- Src file for Font Types -->
-<link rel="stylesheet" href="stylesheet.css" type="text/css" charset="utf-8" />
-
-  </head>
-  <body>
-      <!-- Comtainer to Hold All Info On Page -->
-            <div class="container">
-                    <h2 class="header">Football Fanatic Quiz</h2>
-                    
-                      <div class="form-group">
-                        <label id ="label1">Click Here To Start Quiz</label>
-                      </div>
-                      <button type="button" onclick="startQuiz()" type="button" class="btn btn-default" id="start">Start Quiz!</button>
-                      <!-- Div class for Quiz -->
-                <div class = 'quizContainer'>
-                        <div id='quiz'>
-                            
-                        </div>
-                        </div>
-                        <button onclick="reload()" type="submit" class="btn btn-default">Restart</button>
-                        <button type="button" class="btn btn-default" id = "previous">Previous</button>
-                        <button type="button" class="btn btn-default" id = "next">Next</button>
-                        <button type="button" class="btn btn-default"id ="submit">Submit</button>
-                        <div id='results'>
+<!--Begin Style Section-->
+<!-- Code By Alyssa -->
+<style>
+    
+   body {background-color: black;
         
-                        </div>
-                    
-                 
-                <script>
-
-                
-                    // Function to be called to start quiz 
-                    function startQuiz(){
-                    //     //show the quiz 
-                    var x = document.getElementById("start");
-                    document.getElementById("quiz").style.display = "block";
-                    document.getElementById("label1").style.display ="none";
-                         if (x.style.display === "none") {
-                           x.style.display = "block";
-                           } else {
-                            x.style.display = "none";
-                             }
-                            
-                        
-                        
-                    }
-                    //function to reload the page when function is button is clicked
-                    function reload(){
-                        location.reload(true);
-                    }
-                    //function to build quiz 
-                    (function(){
-                        const questions =[
-                        {question: "What is the name of the Team from Friday Night Lights?",
-                        answers:{
-                            a:"Dallas Carter",
-                            b:"Permium Tigers",
-                            c:"Heights Aviators"
-
-                        },
-                        correctAnswer: "b"},
-                        {question: "Who won the Superbowl in 2002?",
-                        answers:{
-                            a:"Tampa Bay Bucs",
-                            b:"New York Jets",
-                            c:"St. Louis Rams"
-
-                        },
-                        correctAnswer: "a"},
-                        {question: "What does RPO stand for?",
-                        answers:{
-                            a:"Run Portional Offense",
-                            b:"Running Positional Operations",
-                            c:"Run Pass Option"
-
-                        },
-                        correctAnswer: "c"},
-                        {question: "How many players are on the field for one time at a time?",
-                        answers:{
-                            a:"11",
-                            b:"22",
-                            c:"9"
-
-                        },
-                        correctAnswer: "a"},
-                        ];
-                        function buildQuiz(){
-                            //array for output 
-                            const output = [];
-                            // for each loop to build questions
-                            questions.forEach((currentQuestion,questionNumber) => {
-                                //list of answers
-                                const answers =[];
-                                //Here is my loop for this project 
-                                for (correctValue in currentQuestion.answers){
-                                    answers.push(
-                                       `<label>
-                                           <input type="radio" name = "question${questionNumber}"value= "${correctValue}">
-                                                  ${correctValue}:
-                                                ${currentQuestion.answers[correctValue]}
-                                           </label>`
-                                    );
-                                }
-                                //  add to output 
-                                   output.push(
-                                      `<div class ="slide">
-                                        <div class = "question">
-                                        ${currentQuestion.question}</div>
-                                        <div class= "answers"> ${answers.join("")}
-                                        </div>
-                                        </div>`
-                                   );
-                            });
-                            quizContainer.innerHTML = output.join("");
-
-                        }
-                        function showResults(){
-                            //collect answers from quiz
-                            const answerContainers = quizContainer.querySelectorAll(".answers");
-                             //variable to keep track of correct Answers
-                             var numCorrect = 0;
-                             questions.forEach((currentQuestion,questionNumber) => {
-                                 //find selected answers
-                                 const answerContainer = answerContainers[questionNumber];
-                                 const selector = 
-                                 `input[name=question${questionNumber}]:checked`;
-                                 const userInput = (answerContainer.querySelector(selector) || {}).value;
-                                 //check answers
-                                 if(userInput === currentQuestion.correctAnswer){
-                                     numCorrect ++;
-                                     //change color of the answers
-                                     answerContainers[questionNumber].style.color = "lightgreen";
-                                 } else{
-                                    answerContainers[questionNumber].style.color = "red";
-                                 }
-                             });
-                             resultsContainer.innerHTML = `${numCorrect} out of ${questions.length}`;
-                        }
-                        function showSlide(n){
-                            slides[currentSlide].classList.remove("active-slide");
-                            slides[n].classList.add("active-slide");
-                            currentSlide = n; 
-                            if (currentSlide === 0){
-                                previousButton.style.display="none";
-                            } else{
-                                previousButton.style.display = "inline-block";
-                            }
-                            if (currentSlide === slides.length -1){
-                                nextButton.style.display = "none";
-                                submitButton.style.display = "inline-block";
-                            } else{
-                                 nextButton.style.display = "inline-block";
-                                 submitButton.style.display = "none";
-                            }
-                        }
-                        function showNextSlide(){
-                            showSlide(currentSlide +1);
-                        }
-                        function showPrevSlide(){
-                            showSlide(currentSlide -1);
-                        }
-                        const quizContainer = document.getElementById("quiz");
-                        const resultsContainer = document.getElementById("results");
-                        const submitButton = document.getElementById("submit");
-                          
-                          buildQuiz();
-
-                          const previousButton = document.getElementById("previous");
-                          const nextButton = document.getElementById("next");
-                          const slides = document.querySelectorAll(".slide");
-                          var currentSlide = 0; 
-                          showSlide(0);
-
-                          submitButton.addEventListener("click",showResults);
-                          previousButton.addEventListener("click",showPrevSlide);
-                          nextButton.addEventListener("click",showNextSlide);
-
-                    }) ();
-
-                </script>
-       <!-- <iframe src='//www.hudl.com/embed/video/3/2767142/5721ccbb9a91677e749dc7bd' width='640' height='360' frameborder='0' allowfullscreen></iframe>
-                set upFooter at bottom of Page -->
-                
-        <div class= "copyright text-center py-3">
-            Scott Salerno <br>
-            Shapiro's Class 2019
-            
-          </div>
-
-    </div>
-    <style>
-        
-        @font-face {
-    font-family: 'friday_night_lightsregular';
-    src: url('fnl_demo-kcfonts-webfont.woff2') format('woff2'),
-         url('fnl_demo-kcfonts-webfont.woff') format('woff');
+    }  
+    
+   
+    
+    .background1 img {width: 80%; 
+                      position: absolute; 
+                      left: 10%;  
+                      top: 8%; 
+                      opacity: 20%;
+                      z-index: -99;
+                    visibility: visible;}
+    header {width: 100%; 
+            height: 200px; }
+    
+    header img {width: 70%; 
+                position: absolute; 
+                left: 15%;
+               }
+     @font-face {
+    font-family: 'Marvel';
+    src: url('Marvel-Regular.woff2') format('woff2'),
+        url('Marvel-Regular.woff') format('woff');
     font-weight: normal;
     font-style: normal;
+}
+    .title h1 {color:  #ff1a1a; 
+            font-family: Marvel; 
+            font-size: 4em; 
+            font-style: normal; 
+            font-variant: normal; 
+            font-weight: 50; 
+            letter-spacing: 3px; 
+    margin-left: 1%;}
+    .title {
+        position:absolute; 
+        margin-top: 10%;
+        left: 35%;
+        width: 100%;
 
-}
-        /* style for footer */
-    .copyright {
-  padding: 15px 0;
-  color: #0894d1;
-  background: #333;
-  margin-top: 20px;
-  font-size: 15px;
-}
-/* Style for header */
-.header{
-    padding: 15px 0;
-    font-family: 'friday_night_lightsregular';
-  color: #0894d1;
-  background: #333;
-  margin-top: 20px;
-}
-@import url(https://fonts.googleapis.com/css?family=Work+Sans:300,600);
+    }
 
-body{
-    font-size: 20px;
-    font-family: 'Work Sans', sans-serif;
-    color: #333;
-  font-weight: 300;
-  text-align: center;
-  background-color: #f8f6f0;
+    .start input { background-color: #ff1a1a; 
+                    color: black;
+                    width: 200px;
+                    height: 100px; 
+                    font-size: 3em; 
+                    font-family: Impact, Charcoal, sans-serif;}
+    
+    .start {margin-left: 42%; 
+            margin-top: 15%;}
+            .title {
+        position:absolute; 
+        left: 35%; 
+      
+        top: 19%;
+    }
+    .questionTitle {
+        position:absolute; 
+        left: 35%; 
+      
+        top: 19%;
+    }
+    .whitebox {background-color: white; 
+               width: 40%; 
+               height: 50%; 
+               position: absolute; 
+               top: 35%; 
+               left: 29%; 
+               padding: 15px;
+                opacity: 60%;
+                display: none;
+    }
+    #q1{display: none;}
+    #q2{
+        display:none;
+    }
+    #q3 {display:none;}
+    #q4 {display:none;}
+    #q5 {display:none;}
+    #q6 {display:none;}
+    #q7 {display:none;}
+    #q8 {display:none;}
+    #q9 {display:none;}
+    #q10 {display:none;}
+    #q11 {display:none;}
+    #q12 {display:none;}
+    #q13 {display:none;}
+    #q14 {display:none;}
+    #q15 {display:none;}
+    #q16 {display:none;}
+    #q17 {display:none;}
+    #q18 {display:none;}
+    #q19 {display:none;}
+    #q20 {display:none;}
+    
+   
+
+    .whitebox h1 {color:  #ff1a1a; 
+                  font-family: Impact, Charcoal, sans-serif;
+                  letter-spacing: 3px;
+                  text-align: center;
+                    margin-top: 2%;}
+    
+    .whitebox p {font-size: 1.3em;
+                line-height: 2;
+                margin-left: 10%;
+                font-family: Tahoma, Geneva, sans-serif;
+        
+    }
+    
+    .leftside1 {float: left;  
+               width: 30%; 
+               margin-left: 15%;
+                margin-top: 5%;}
+    .rightside1 {float: right;  
+                width: 40%; 
+                margin-right: 10%;
+                margin-top: 5%;}
+     .leftside2 {float: left;  
+               width: 80%; 
+                margin-left: 18%;
+                margin-top: 12%;
+              }
+    .rightside2 {float: left;  
+                width: 40%; 
+                margin-left: 28%; }
+      .leftside3 {float: left;  
+               width: 100%; 
+               margin-left:10%;
+                margin-top: 10%;
+              }
+    .rightside3 {float: right;  
+                width: 20%; 
+                margin-right: 25%;
+    margin-top: -20%;}
+    
+       .leftside4 {float: left;  
+               width: 100%; 
+               margin-left:15%;
+                margin-top: 5%;
+              }
+    .rightside4 {float: right;  
+                width: 40%; 
+                margin-right: 15%;
+    margin-top: -20%;}
+    
+    
+       .leftside5 {float: left;  
+               width: 100%; 
+               margin-left:10%;
+                margin-top: 10%;
+              }
+    .rightside5 {float: right;  
+                width: 40%; 
+                margin-right: 10%;
+    margin-top: -20%;}
+    
+    
+    
+      .leftside6 {float: left;  
+               width: 100%; 
+               margin-left:10%;
+                margin-top: 5%;
+              }
+    .rightside6 {float: right;  
+                width: 40%; 
+                margin-right: 10%;
+    margin-top: -20%;}
+    
+       .leftside7 {float: left;  
+               width: 100%; 
+               margin-left:10%;
+                margin-top: 5%;
+              }
+    .rightside7 {float: right;  
+                width: 40%; 
+                margin-right: 10%;
+    margin-top: -20%;}
+    
+    
+        .leftside8 {float: left;  
+               width: 100%; 
+               margin-left:5%;
+                margin-top: 3%;
+              }
+    .rightside8 {float: right;  
+                width: 40%; 
+                margin-right: 7%;
+    margin-top: -28%;}
+     .leftside9 {float: left;  
+               width: 30%; 
+               margin-left: 15%;
+                margin-top: 10%;}
+    .rightside9 {float: right;  
+                width: 40%; 
+                margin-right: 10%;
+                margin-top: 10%;}
+    
+    .leftside10 {float:left; margin-left: 20%; width: 100%; margin-top:5%}
+    .rightside10 {float:left; margin-left: 20%; width: 100%; margin-top: -2%;}
+    
+      .leftside11 {float: left;  
+               width: 30%; 
+               margin-left: 20%;
+                margin-top: 10%;}
+    .rightside11 {float: right;  
+                width: 40%; 
+                margin-right: 10%;
+                margin-top: 10%;}
+      .leftside12 {float: left;  
+               width: 40%; 
+               margin-left: 10%;
+                margin-top: 10%; }
+    .rightside12 {float: right;  
+                width: 30%; 
+                margin-right: 15%;
+                margin-top: 15%;}
+    
+       .leftside13 {float: left;  
+               width: 30%; 
+               margin-left: 15%;
+                margin-top: 5%; }
+    .rightside13 {float: right;  
+                width: 30%; 
+                margin-right: 20%;
+                margin-top: 10%; }
+    
+       .leftside14 {float: left;  
+               width: 30%; 
+               margin-left: 15%;
+                margin-top: 5%; }
+    .rightside14 {float: right;  
+                width: 30%; 
+                margin-right: 20%;
+                margin-top: 10%; }
+    .leftside15 {float: left;  
+               width: 30%; 
+               margin-left: 20%;
+                margin-top: 10%; }
+    .rightside15 {float: right;  
+                width: 30%; 
+                margin-right: 20%;
+                margin-top: 15%; }
+    
+       .leftside16 {float: left;  
+               width: 50%; 
+               margin-left: 25%;
+                margin-top: 2%;  }
+    .rightside16 {float: left;  
+                width: 50%; 
+                margin-left: 25%; margin-top: -2%
+                }
+    
+    .leftside17 {float: left;  
+               width: 30%; 
+               margin-left: 20%;
+                margin-top: 5%; }
+    .rightside17 {float: right;  
+                width: 30%; 
+                margin-right: 20%;
+                margin-top: 10%;}
+       .leftside18 {float:left; margin-left: 20%; width: 100%; margin-top:1%}
+    .rightside18 {float:left; margin-left: 20%; width: 100%; margin-top: -2%;}
+    
+    
+        .leftside19 {float: left;  
+               width: 80%; 
+               margin-left: 15%;
+                margin-top: 2%;  }
+    .rightside19 {float: left;  
+                width: 80%; 
+                margin-left: 15%; margin-top: -2%
+                }
+     
+    .leftside20 {float: left;  
+               width: 30%; 
+               margin-left: 20%;
+                margin-top: 10%; }
+    .rightside20 {float: right;  
+                width: 30%; 
+                margin-right: 20%;
+                margin-top: 10%;}
+    
+      .next input { background-color: #ff1a1a; 
+                    color: black;
+                    width: 100px;
+                    height: 50px; 
+                    font-size: 2em; 
+                    font-family: Impact, Charcoal, sans-serif;
+                    letter-spacing: 3px;
+                    margin-top: 10%;
+    position: absolute; top: 250px; left: 210px;
+    clear: all;}
+    .next {margin-left: 39%; }
+    /*
+    .progress{margin-top:3%;}
+    .progress-bar {background-color: red; }*/
+    
+    .endbox h1 {color:  #ff1a1a; 
+                  font-family: Impact, Charcoal, sans-serif;
+                  letter-spacing: 3px;
+                  text-align: center;
+                    margin-top: 2%;}
+     .endbox {background-color: white; 
+               width: 60%; 
+               height: 60%; 
+               position: absolute; 
+               top: 35%; 
+               left: 20%; 
+               padding: 15px;
+                opacity: 60%;
+                display:none;
+    }
+    .endbox img {width: 50%; height: auto; float: left; margin-top: 5%;}
+    .endbox p {width: 40%; float: right; color: black; margin-top: 10%; line-height: 2; margin-right: 5%;}
+    .getResult{ display: none;}
+    .getResultButton{
+        display: none;
+        background-color: #ff1a1a; 
+                    color: black;
+                    width: 100px;
+                    height: 50px; 
+                    font-size: 2em; 
+                    font-family: Impact, Charcoal, sans-serif;
+                    letter-spacing: 3px;
+                    margin-top: 10%;
+    position: absolute; top: 250px; left: 210px;
+    clear: all;}
+    .restartButton{
+        background-color: #ff1a1a; 
+                    color: black;
+                    width: 100px;
+                    height: 50px; 
+                    font-size: 2em; 
+                    font-family: Impact, Charcoal, sans-serif;
+                    letter-spacing: 3px;
+                    margin-top: 10%;
+    position: absolute; top: 250px; left: 210px;
+    clear: all;
+    }
+    #captain_america
+    { display: none;}
+    #thor
+    { display: none;}
+    #hulk
+     { display: none;}  
+     #ironman
+     { display: none;}  
+     #spiderman
+     { display: none;}  
+     #blackwidow
+     { display: none;}  
+     #captain_marvel
+     { display: none;}  
+     #dr_strange
+     { display: none;}  
+     #antman
+     { display: none;}   
+     #groot
+     { display: none;}         
+     
+    
+                
+    
+</style>
+<!--End Style-->
+<!--Script (Scott)-->
+<script>
+  //Scott Wrote this 
+//Variables for characters
+var CAPTAIN_AMERICA = 0; 
+var THOR = 0; 
+var HULK =0;
+var IRONMAN = 0;
+var SPIDERMAN = 0;
+var BLACKWIDOW = 0;
+var CAPTIAN_MARVEL = 0;
+var DR_STRANGE = 0;
+var ANTMAN =0; 
+var GROOT =0;
+
+// Array to Hold string value for heros
+var stringHero = ["captain_america","thor","hulk","ironman","spiderman","blackwidow","captain_marvel","dr_strange","antman","groot"];
+function getResult(){
+addScore();
+//Array of characters to compare
+var Hero = [CAPTAIN_AMERICA,THOR,HULK,IRONMAN,SPIDERMAN,BLACKWIDOW,CAPTIAN_MARVEL,DR_STRANGE,ANTMAN];
+var max = 0;
+var heroIndex = 0;
+//For loop to get the largest Value 
+for(i =0; i < Hero.length; i++){
+    if (Hero[i] > max ){
+        max = Hero[i];
+        heroIndex = i;
+    }
 }
-h1{
-  font-weight: 300;
-  margin: 0px;
-  padding: 10px;
-  font-size: 20px;
-  background-color: #444;
-  color: #fff;
+return(stringHero[heroIndex]);
 }
-.question{
-  font-size: 30px;
-  margin-bottom: 10px;
-}
-.answers {
-  margin-bottom: 20px;
-  text-align: left;
-  display: inline-block;
-}
-.answers label{
-  display: block;
-  margin-bottom: 10px;
-}
-.btn-default{
-  font-family: 'Work Sans', sans-serif;
-    font-size: 22px;
-    background-color: #279;
-    color: #fff;
-    border: 0px;
-    border-radius: 3px;
-    padding: 20px;
-    cursor: pointer;
-    margin-bottom: 20px;
-}
- .btn-default:hover{
-    background-color: #38a;
+//takes the outcome and adds 1 to score for the hero the answer corresponds too
+//Scott Wrote this
+function addScore(){
+    var heroName = $('.answer:checked').val();
+    if (heroName == "captain_america"){
+        CAPTAIN_AMERICA ++;
+        //alert(CAPTAIN_AMERICA);
+    }
+    else if (heroName == "thor"){
+         THOR ++;
+         //alert(THOR);
+    }
+    else if (heroName == "hulk"){
+         HULK ++;
+         //alert(HULK);
+    }
+    else if (heroName == "ironman"){
+         IRONMAN ++;
+         //alert(IRONMAN);
+    }
+    else if (heroName == "spiderman"){
+     SPIDERMAN ++;
+     //alert(SPIDERMAN);
+    }
+    else if (heroName == "blackwidow"){
+        BLACKWIDOW ++;
+       // alert(BLACKWIDOW);
+    }
+    else if (heroName == "captain_marvel"){
+         CAPTIAN_MARVEL ++;
+        // alert(CAPTIAN_MARVEL);
+    }
+    else if (heroName == "dr_strange"){
+        DR_STRANGE++;
+        //alert(DR_STRANGE);
+    }
+    else if (heroName == "antman"){
+        ANTMAN ++;
+       // alert(ANTMAN);
+    } 
+    else if(heroName == "groot"){
+         GROOT++;
+        // alert(GROOT);
+    }
+    
+    
+}       
+//JavaScript-C24.2.0 (SpiderMonkey)
+//End Scott Code 
+
+/* functions show and hide questions and progress bar when buttons on each page are clicked on*/
+// Alyssa and Sofia wrote this 
+   
+   //Scott Wrote this 
+   $(document).ready(function(){
+   $('input[type="checkbox"]').on('change', function() {
+    $('input[name="' + this.name + '"]').not(this).prop('checked', false);
+   });
+   
+
+function randomQuestionPick(array) {
+  var copy = array.slice(0);
+  return function() {
+    if (copy.length < 1) { copy = array.slice(0); }
+    var index = Math.floor(Math.random() * copy.length);
+    var item = copy[index];
+    copy.splice(index, 1);
+    return item;
+  };
 }
 
-.slide{
-  left: 0px;
-  top: 0px;
-  width: 100%;
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.5s;
-}
-.active-slide{
-  opacity: 1;
-  z-index: 2;
-}
-.quiz-container{
-  position: relative;
-  height: 100px;
-  margin-top: 40px;
-}
-#quiz{
-  display: none;
+ //function to reload the page when function is button is clicked
+ function reload(){
+    location.reload(true);
+    }
+   
+/* functions show and hide questions and progress bar when buttons on each page are clicked on*/
+var questionsArray = ["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12","q13","q14","q15","q16","q17","q18","q19","q20"] 
+$(document).ready(function(){
+    var chooser = randomQuestionPick(questionsArray);
+    var q1 = "#" + chooser();
+    var q2 = "#" + chooser();
+    var q3 = "#" + chooser();
+    var q4 = "#" + chooser();
+    var q5 = "#" + chooser();
+    var q6 = "#" + chooser();
+    var q7 = "#" + chooser();
+    var q8 = "#" + chooser();
+    var q9 = "#" + chooser();
+    var q10 = "#" + chooser();
+    var randomQuestionsArr = [q1,q2,q3,q4,q5,q6,q7,q8,q9,q10,"#getResult"];
+    var i =0;
+    // Alyssa & Sofia  wrote this 
+    $("#1").click(function(){
+           $(".title").fadeOut(500)
+           $('.start').fadeOut(500)
+           $('.whitebox').fadeIn(1000)
+           $(randomQuestionsArr[0]).fadeIn(1000)
+       });
+       //End Alyssa & Sofia 
+       
+            // Alyssa & Sofia  wrote this 
+        $('.nextButton').click(function(){
+           $(randomQuestionsArr[i]).fadeOut(500)
+           $(randomQuestionsArr[i+1]).fadeIn(500)
+           i = i+1;    
+           if(i == 10){
+        $('.getResultButton').fadeIn(500)
+       }  
+           //alert(randomQuestionsArr[i]);
+       });
+       
+         $('.getResultButton').click(function(){
+            $(randomQuestionsArr[i]).fadeOut(500)
+            $('.whitebox').fadeOut(500)
+            $('.endbox').fadeIn(500)
+            var hero = "#" +getResult()
+            $(hero).fadeIn(1000);
 
+         });
+       //End Alyssa & Sofia 
+       
 }
+  
+  
+       
+ ,)});
+   //End Scott Code
+</script>
+  <!--End Script-->
+
+</head>
+<!--End Head copy--> 
+    
+    
+    
+<!--Begin Body Copy-->
+<body>
+    
+<div id ="wrapper">
+    
+<header>
+    
+    <img src ="assets/marvel%20logo.png" alt = "Logo" width= "100%" height ="auto">
+    
+</header>
+
+<div class = "background1">
+    
+    <img src ="assets/Endgame-wallpapers-HD-Images-4K-Marvel-Studios-Avengers-Background.jpg" alt ="Avengers" width="100%" height ="auto">
+    
+</div>
+
+<div class="title">
+    
+    <h1>WHO ARE YOU QUIZ</h1>
+
+</div>
+    
+    
+    
+    
+  
+    
+ <div class="start">
+    <input id="1" type="button" value="START" >
+</div> 
+
+<div class="whitebox">
+    <!--Start Scott Questions-->
+    <div id="q1">
+        <h1>What personality trait describes you most?</h1>
+        
+        <div class="leftside1">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q1" class="answer" value="thor"  > Brave</input> <br> &nbsp;<input name="q1" type="checkbox" class="answer" value="hulk"  > Hot Headed</input><br>  &nbsp;<input name="q1" type="checkbox" class="answer" value="antman"  > Sarcastic</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside1">
+                <p><strong> &nbsp;<input name="q1" type="checkbox" class="answer" value="groot"  > Childish</input><br>  &nbsp;<input name="q1" type="checkbox" class="answer" value="captain_america"  > Old Fashioned</input> <br> &nbsp;<input name="q1" type="checkbox" class="answer" value="spiderman" > Funny</input></strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+                 
+    </div> 
+
+  <!--          <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="10"
+  aria-valuemin="0" aria-valuemax="100" style="width:10%">
+    <span class="sr-only">10% Complete</span>
+  </div>
+        </div>-->
+</div> 
+    
+
+<!-- 
+//Question 2  -->
+<div id="q2">
+    <h1>What is your favorite color?</h1>
+    
+    <div class="leftside2">
+        <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+      <p> <strong>
+         &nbsp;<input  type="checkbox" name="q2" class="answer" value="hulk"> Green </input> &nbsp;<input name="q2" type="checkbox" class="answer" value="antman"  > Red</input>  &nbsp;<input name="q2" type="checkbox" class="answer" value="captain_america"  > Blue </input>  
+          </strong>
+    </p>  
+        
+        </div>
+        <div class="rightside2">
+            <p><strong> &nbsp;<input name="q2" type="checkbox" class="answer" value="blackwidow"  > Black</input> &nbsp;<input name="q2" type="checkbox" class="answer" value="captain_marvel"  > Yellow</input></strong> </p> 
+        </div>
+        
+        
+         <div class="next">
+    <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+</div> 
+    </div>
+
+<!-- Question 3  -->
+<div id="q3">
+        <h1>What is your favorite food?</h1>
+        
+        <div class="leftside3">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q3" class="answer" value="groot"> Mac & Cheese </input> <br>  &nbsp;<input name="q3" type="checkbox" class="answer" value="hulk"  > Tacos</input><br>  &nbsp;<input name="q3" type="checkbox" class="answer" value="spiderman"  > Chicken Tenders </input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside3">
+                <p><strong> &nbsp;<input name="q3" type="checkbox" class="answer" value="blackwidow"  > Salad</input> <br>&nbsp;<input name="q3" type="checkbox" class="answer" value="ironman"  > Donuts</input></strong> </p> 
+            </div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+    </div>
+    <!-- question 4  -->
+    <div id="q4">
+            <h1> What is your favorite vacation spot?</h1>
+            
+            <div class="leftside4">
+                <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+              <p> <strong>
+                 &nbsp;<input type="checkbox" name="q4" class="answer" value="dr_strange"> Florida </input> <br>  &nbsp;<input name="q4" type="checkbox" class="answer" value="antman"  > Bahamas</input><br>  &nbsp;<input name="q4" type="checkbox" class="answer" value="blackwidow"  > California </input> <br> 
+                  </strong>
+            </p>  
+                
+                </div>
+                <div class="rightside4">
+                    <p><strong> &nbsp;<input name="q4" type="checkbox" class="answer" value="spiderman"  > Europe</input><br> &nbsp;<input name="q4" type="checkbox" class="answer" value="captain_marvel"  > New York City</input></strong> </p> 
+                </div>
+                
+                
+                 <div class="next">
+            <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+        </div> 
+            </div>
+        
+        <!-- question 5  -->
+        <div id="q5">
+                <h1> Choose a Planet to Visit: </h1>
+                
+                <div class="leftside5">
+                    <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+                  <p> <strong>
+                     &nbsp;<input type="checkbox" name="q5" class="answer" value="captain_america"> Earth </input> <br>  &nbsp;<input name="q5" type="checkbox" class="answer" value="groot"  > I AM GROOT!</input><br>  &nbsp;<input name="q5" type="checkbox" class="answer" value="blackwidow"  > Vormir </input> <br> 
+                      </strong>
+                </p>  
+                    
+                    </div>
+                    <div class="rightside5">
+                        <p><strong> &nbsp;<input name="q5" type="checkbox" class="answer" value="thor"  > Asgard</input><br> &nbsp;<input name="q5" type="checkbox" class="answer" value="dr_strange"  > Nowhere</input></strong> </p> 
+                    </div>
+                    
+                    
+                     <div class="next">
+                <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+            </div> 
+            </div>
+
+<!--End Scott Questions.. Start Alyssa Questions-->
+    <div id="q6">
+        <h1>What is the most attractive quality in a person?</h1>
+        
+        <div class="leftside6">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q6" class="answer" value="ironman"  > Really Rich</input> <br> &nbsp;<input name="q6" type="checkbox" class="answer" value="groot"  > Honest</input><br>  &nbsp;<input name="q6" type="checkbox" class="answer" value="captain_america"  > Strong Morals</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside6">
+                <p><strong> &nbsp;<input name="q6" type="checkbox" class="answer" value="dr_strange"  > Loyal</input><br>  &nbsp;<input name="q6" type="checkbox" class="answer" value="spiderman"  > Humor</input></strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+    
+            
+</div>  
+    
+     <div id="q7">
+        <h1>What would you risk your life for?</h1>
+        
+        <div class="leftside7">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q7" class="answer" value="ironman"  > Family</input> <br> &nbsp;<input name="q7" type="checkbox" class="answer" value="antman"  > Money</input><br>  &nbsp;<input name="q7" type="checkbox" class="answer" value="captain_america"  > Justice</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside7">
+                <p><strong> &nbsp;<input name="q7" type="checkbox" class="answer" value="dr_strange"  > Peace</input><br>  &nbsp;<input name="q7" type="checkbox" class="answer" value="hulk"  > Revenge</input></strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            <div class="progress">
+  <div class="progress-bar" role="progressbar" aria-valuenow="10"
+  aria-valuemin="0" aria-valuemax="100" style="width:10%">
+    <span class="sr-only">10% Complete</span>
+  </div>
+        </div>
+</div> 
+    
+       <div id="q8">
+        <h1>Someone betrayed you..what do you do?</h1>
+        
+        <div class="leftside8">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q8" class="answer" value="dr_strange"  > Find Proof</input> <br> &nbsp;<input name="q8" type="checkbox" class="answer" value="hulk"  > Smash Them</input><br>  &nbsp;<input name="q8" type="checkbox" class="answer" value="thor"  > Talk to them <br>&nbsp;over a drink</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside8">
+                <p><strong> &nbsp;<input name="q8" type="checkbox" class="answer" value="captain_marvel"  > Ignore it</input><br>  &nbsp;<input name="q8" type="checkbox" class="answer" value="blackwidow"  > Keep it as blackmail</input></strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            
+</div> 
+     
+      <div id="q9">
+        <h1>Are you groot?</h1>
+        
+        <div class="leftside9">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q9" class="answer" value="groot"  > I am groot</input> <br> &nbsp;<input name="q9" type="checkbox" class="answer" value="groot"  > Yes</input><br>  &nbsp;<input name="q9" type="checkbox" class="answer" value="antman"  > Maybe</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside9">
+                <p><strong> &nbsp;<input name="q9" type="checkbox" class="answer" value="captain_marvel"  > No</input><br>  &nbsp;<input name="q9" type="checkbox" class="answer" value="blackwidow"  > Is there an option?</input></strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            
+</div>  
+
+ <div id="q10">
+        <h1>Choose a city to live in…</h1>
+        
+        <div class="leftside10">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q10" class="answer" value="spiderman"  > New York City</input> <br> &nbsp;<input name="q10" type="checkbox" class="answer" value="blackwidow"  > Chicago</input><br>  &nbsp;<input name="q10" type="checkbox" class="answer" value="ironman"  > LA</input> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside10">
+                <p><strong> &nbsp;<input name="q10" type="checkbox" class="answer" value="thor"  > Some other city</input><br>  &nbsp;<input name="q10" type="checkbox" class="answer" value="hulk"  > I prefer the open land</input></strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            
+</div>  
+
+    <!--end of Alyssa questions...Start Parker's Questions-->
+<div id="q11">
+        <h1>Choose one infinity stone...</h1>
+        
+        <div class="leftside11">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q11" class="answer" value="dr_strange"  > Time</input> <br> &nbsp;<input name="q11" type="checkbox" class="answer" value="thor"  > Power</input><br>  &nbsp;<input name="q11" type="checkbox" class="answer" value="spiderman"  > Soul</input> <br> 
+              </strong>
+          </p>  
+            
+        </div>
+        <div class="rightside11">
+              <p><strong> &nbsp;<input name="q11" type="checkbox" class="answer" value="antman"  > Reality</input><br>  &nbsp;<input name="q11" type="checkbox" class="answer" value="ironman"  > Space</input> <br> &nbsp;<input name="q11" type="checkbox" class="answer" value="captain_marvel" > Mind</input></strong> </p> 
+</div>
+  <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+</div>
+<div id="q12">
+        <h1>Choose a superpower...</h1>
+        
+        <div class="leftside12">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q12" class="answer" value="groot"  > I am Groot</input> <br> &nbsp;<input name="q12" type="checkbox" class="answer" value="blackwidow"  > Ninja Skills</input><br>  &nbsp;<input name="q12" type="checkbox" class="answer" value="captain_marvel"  > Alien Powers</input> <br> 
+              </strong>
+          </p>  
+            
+        </div>
+        <div class="rightside12">
+              <p><strong> &nbsp;<input name="q12" type="checkbox" class="answer" value="thor"  > Electricity</input><br>  &nbsp;<input name="q12" type="checkbox" class="answer" value="ironman"  > Wealth</input></strong>
+              </p>
+</div>
+  <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+</div>
+<div id="q13">
+        <h1>What is your biggest weakness?</h1>
+        
+        <div class="leftside13">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q13" class="answer" value="captain_america"  > Women</input> <br> &nbsp;<input name="q13" type="checkbox" class="answer" value="hulk"  > Impatience</input><br>  &nbsp;<input name="q13" type="checkbox" class="answer" value="thor"  > Hammers</input> <br> 
+              </strong>
+          </p>  
+            
+        </div>
+        <div class="rightside13">
+              <p><strong> &nbsp;<input name="q13" type="checkbox" class="answer" value="antman"  > Pesticides</input><br>  &nbsp;<input name="q13" type="checkbox" class="answer" value="captain_marvel"  > Ego</input></strong><br>
+        </p>
+</div>
+  <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+</div>
+<div id="q14">
+        <h1>What is your biggest strength?</h1>
+        
+        <div class="leftside14">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q14" class="answer" value="ironman"  > Intelligence</input> <br> &nbsp;<input name="q14" type="checkbox" class="answer" value="dr_strange"  > Ambition</input><br>  &nbsp;<input name="q14" type="checkbox" class="answer" value="captain_america"  > Bravery</input> <br> 
+              </strong>
+          </p>  
+            
+        </div>
+        <div class="rightside14">
+              <p><strong> &nbsp;<input name="q14" type="checkbox" class="answer" value="thor"  > Leadership</input><br>  &nbsp;<input name="q14" type="checkbox" class="answer" value="spiderman"  > Selflessness</input> <br></strong></p> 
+</div>
+  <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+</div>
+<div id="q15">
+        <h1>What do you value most?</h1>
+        
+        <div class="leftside15">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q15" class="answer" value="hulk"  > Power</input> <br> &nbsp;<input name="q15" type="checkbox" class="answer" value="antman"  > Family</input><br>  &nbsp;<input name="q15" type="checkbox" class="answer" value="groot"  > Love</input> <br> 
+              </strong>
+          </p>  
+            
+        </div>
+        <div class="rightside15">
+              <p><strong> &nbsp;<input name="q15" type="checkbox" class="answer" value="spiderman"  > Intelligence</input><br>  &nbsp;<input name="q15" type="checkbox" class="answer" value="ironman"  > Wealth</input> <br></strong> </p> 
+</div>
+  <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+</div>   
+
+<!--End Parkers questions...Start Sofias questions-->
+
+ <div id="q16">
+        <h1>What are you most afraid of?</h1>
+        
+        <div class="leftside16">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q16" class="answer" value="thor"  >Becoming homeless</input> <br> &nbsp;<input name="q16" type="checkbox" class="answer" value="captain_america"  >Losing a friend</input><br>  &nbsp;<input name="q16" type="checkbox" class="answer" value="antman"  >Bugs</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside16">
+                <p><strong> &nbsp;<input name="q16" type="checkbox" class="answer" value="dr_strange"  >The end of the world</input> <br> &nbsp;<input name="q16" type="checkbox" class="answer" value="spiderman" >Grown-ups</input></strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            
+</div> 
 
 
-    </style>
-   </body>
+
+<div id="q17">
+        <h1>What is your favorite school subject?</h1>
+        
+        <div class="leftside17">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q17" class="answer" value="spiderman"  >Physics</input> <br> &nbsp;<input name="q17" type="checkbox" class="answer" value="blackwidow"  >Drama</input><br>  &nbsp;<input name="q17" type="checkbox" class="answer" value="ironman"  >Math</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside17">
+                <p><strong> &nbsp;<input name="q17" type="checkbox" class="answer" value="hulk"  >Biology</input><br>  &nbsp;<input name="q17" type="checkbox" class="answer" value="captain_america"  >History</input> <br> &nbsp;</strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+           
+</div> 
+
+<div id="q18">
+        <h1>What is your least favorite school subject?</h1>
+        
+        <div class="leftside18">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q18" class="answer" value="groot"  >Foriegn Language</input> <br> &nbsp;<input name="q18" type="checkbox" class="answer" value="antman"  >Physical Education</input><br>  &nbsp;<input name="q18" type="checkbox" class="answer" value="thor"  >Science</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside18">
+                <p><strong> &nbsp;<input name="q18" type="checkbox" class="answer" value="captain_marvel"  > Home Economics</input><br>  &nbsp;<input name="q18" type="checkbox" class="answer" value="dr_strange"  >Art</input> <br> &nbsp;</strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            
+</div> 
+
+
+<div id="q19">
+        <h1>How man friends do you have?</h1>
+        
+        <div class="leftside19">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q19" class="answer" value="blackwidow"  >One or two</input> <br> &nbsp;<input name="q19" type="checkbox" class="answer" value="spiderman"  >A few, but only one close friend</input><br>  &nbsp;<input name="q19" type="checkbox" class="answer" value="dr_strange"  >Lots but none are really close</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside19">
+                <p><strong> &nbsp;<input name="q19" type="checkbox" class="answer" value="ironman"  >I'm friends with everyone</input><br>  &nbsp;<input name="q19" type="checkbox" class="answer" value="cpatian_marvel"  >What are friends?</input> <br> &nbsp; </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            
+</div> 
+
+
+<div id="q20">
+        <h1>Pick a villian to battle...</h1>
+        
+        <div class="leftside20">
+            <!--The dashes will actually be checkboxes or each word will be a button that the user will press and then hit next-->
+          <p> <strong>
+             &nbsp;<input type="checkbox" name="q20" class="answer" value="thor"  >Thanos</input> <br> &nbsp;<input name="q20" type="checkbox" class="answer" value="ironman"  >Ultron</input><br>  &nbsp;<input name="q20" type="checkbox" class="answer" value="captain_america"  >Red Skull</input> <br> 
+              </strong>
+        </p>  
+            
+            </div>
+            <div class="rightside20">
+                <p><strong> &nbsp;<input name="q20" type="checkbox" class="answer" value="captain_marvel"  >Skrulls</input><br>  &nbsp;<input name="q20" type="checkbox" class="answer" value="hulk"  >Abomination</input> <br> &nbsp;<input name="q20" type="checkbox" class="answer" value="dr_strange" >Dormammu</input></strong> </p> 
+</div>
+            
+            
+             <div class="next">
+        <input class="nextButton" type="button" value="NEXT" onclick="addScore()">
+    </div> 
+            
+</div> 
+<div id="getResult">
+    
+    <input class="getResultButton" type="button" value="Get Result" >
+</div> 
+
+
+</div>
+<!--Start Alyssa's code-->
+<div class="endbox">
+    <div id="captain_america">
+<h1>You Got Captain America!</h1>
+    <img src="Characters/CaptainAmerica.jpg" alt="captainA" width="100%" height="100%">
+    <p>You are brave, honest and are prepared to fight any injustices. Friends and family are very important to you and you are willing to risk everything to protect them. While you are very level headed, your communication skills aren't always the best, leading to rocky relationships. </p>
+    <div class="next">
+        <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+    </div> 
+</div>
+    <div id="antman">
+<h1>You Got Ant-Man!</h1>
+    <img src="Characters/antman.jpg" alt="Antman" width="100%" height="100%">
+    <p>You are incredibly charming, sneaky, and brave. You would risk it all for your family. Your intelligence is one of your greatest strengths, which helps you get out of sticky situations sometimes. You also have a wicked sense of humor and are a great communicator!
+ </p>
+ <div class="next">
+    <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+</div> 
+</div>
+   <div id="groot">
+<h1>You Got Groot!</h1>
+    <img src="Characters/groot.jpg" alt="Groot" width="100%" height="100%">
+    <p>You are sweet and loyal to your friends. You never give up. Sometimes you may not have much to say, but when you do, it is usually: "I am groot."
+ </p>
+ <div class="next">
+    <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+</div> 
+</div>
+
+    <!--End alyssas code-->
+<!--Start Parker's Descriptions-->
+ <div id="blackwidow">
+<h1>You Got Black Widow!</h1>
+    <img src="Characters/BlackWidow.jpg" alt="blackwidow" width="100%" height="100%">
+    <p>You are undeniably confident and fearless in your actions. Your intelligence is one of your greatest strengths which has allowed for you to overcome hard points in your life. You tend to keep your past a secret, and don’t open up to many people. Nevertheless, you truly care about the world around you and would do anything to help others.</p>
+    <div class="next">
+        <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+    </div> 
+  </div>
+
+
+
+  <div id="spiderman">
+<h1>You Got Spiderman!</h1>
+    <img src="Characters/spiderman.jpg" alt="spiderman" width="100%" height="100%">
+    <p>You are an all around happy, funny, adventurous person. You want the best for everyone, and are eager to join in on any new experience that may present itself. Your friend group may be small, but you hold them close and care about them deeply. Your smile and banter make it hard for anyone to dislike you!</p>
+    <div class="next">
+        <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+    </div> 
+  </div>
+
+
+  <div id="ironman">
+<h1>You Got Iron Man!</h1>
+    <img src="Characters/ironman.jpg" alt="ironman" width="100%" height="100%">
+    <p>You are highly knowledge driven and a natural leader. You are the type of person who can make something out of nothing. Although family is incredibly important to you, you often find it hard to remain sensitive to other people’s feelings which can make you seem self-absorbed at points.</p>
+    <div class="next">
+        <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+    </div> 
+  </div>
+<!--End parkers descriptions-->
+<!--Start sofias descriptions-->
+<div id="thor"> <!-- description by Sofia-->
+<h1>You Got Thor!</h1>
+    <img src="Characters/thor.jpg" alt="THOR" width="100%" height="100%">
+    <p>You are a great leader to others and prove it with strength and power. You can’t live without your closest group of friends that go on every adventure with you. You love the life you live and do not do well with a changing environment. 
+ </p>
+ <div class="next">
+    <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+</div> 
+</div>
+
+    
+    <div id="hulk"> 
+<h1>You Got Hulk!</h1> <!-- description by Sofia-->
+    <img src="Characters/hulk.jpg" alt="THOR" width="100%" height="100%">
+    <p>Your temper might not be your greatest attribute, but your intelligence makes up for that.  You like to have your personal space but you are always there for your friends when they need you the most. 
+ </p>
+ <div class="next">
+    <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+</div> 
+</div>
+<!--End Sofias Descriptions-->
+<!--Start Scotts Descriptions-->
+ <div id ="dr_strange">
+        <h1>You Got Doctor Strange!</h1>
+        <img src="Characters/dr.Strange.jpg" alt="DrStrange" width="100%" height="100%">
+        <p> You are a master of the mystic arts! Knowledge and Arrogance are your strengths. While it may seem like you only care about yourself you actually are looking out for the greater good of thw world. </p>
+        <div class="next">
+            <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+        </div> 
+    </div>
+<div id = "captain_marvel">
+        <h1>You Got Captain Marvel!</h1>
+        <img src="Characters/captainMarvel.jpg" alt="captainMarvel" width="100%" height="100%">
+        <p> You are assertive, passionate, and prepared to take on any galactic sized threat you may Face. Your duty and those who cannot defend themselves are important to you as well as proving you are as good as anyone. Your skills of obsrevation and training prepare you for anything you might face.   </p>
+        <div class="next">
+            <button onclick="reload()" type="submit" class="restartButton">Try Again</button>
+        </div> 
+    </div>
+    </div>
+<!--End Scotts Questions-->
+</body>
+<!--End Body Copy-->
+
+
 </html>
