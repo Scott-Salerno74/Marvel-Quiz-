@@ -515,7 +515,7 @@ $(document).ready(function(){
        });
        //End Alyssa & Sofia 
        
-            // Alyssa & Sofia  wrote this 
+            // Scott wrote this 
         $('.nextButton').click(function(){
            $(randomQuestionsArr[i]).fadeOut(500)
            $(randomQuestionsArr[i+1]).fadeIn(500)
@@ -525,7 +525,12 @@ $(document).ready(function(){
        }  
            //alert(randomQuestionsArr[i]);
        });
-       
+       //JQuery to reload the Quiz 
+       $('.restartButton').click(function() {
+    location.reload();
+});
+        //End Scott 
+        //Alyssa and Sofia Wrote this 
          $('.getResultButton').click(function(){
             $(randomQuestionsArr[i]).fadeOut(500)
             $('.whitebox').fadeOut(500)
@@ -534,7 +539,8 @@ $(document).ready(function(){
             $(hero).fadeIn(1000);
 
          });
-       //End Alyssa & Sofia 
+          //End Alyssa & Sofia 
+      
        
 }
   
